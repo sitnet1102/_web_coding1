@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		
+	</beans:bean>
+	
+	<context:component-scan base-package="com.spring.demo" />
+		
+	<beans:bean id="test"  class="com.spring.demo.Test1"></beans:bean>  
+	 	
+	 	 
+	<beans:bean id="test22"  class="com.spring.demo.Test22"></beans:bean> 	 	
+	<beans:bean id="test2"  class="com.spring.demo.Test2">
+		<beans:constructor-arg ref="test22" />
+	</beans:bean>  
+	
+	<beans:bean  id="test3" class="com.spring.demo.Test3">
+		<beans:property name="aaa" value="bbb"/>
+		
+		<beans:property name="testList">
+			<beans:list>
+				<beans:value>list1</beans:value>
+				<beans:value>list2</beans:value>
+				<beans:value>list3</beans:value>			
+			</beans:list>
+		</beans:property>
+		
+		
+		<beans:property name="testMap">
+			<beans:map>
+				<beans:entry>
+					<beans:key>
+						<beans:value>key1</beans:value>
+					</beans:key>
+					<beans:value>val1</beans:value>
+				</beans:entry>
+				<beans:entry>
+					<beans:key>
+						<beans:value>key2</beans:value>
+					</beans:key>
+					<beans:value>val2</beans:value>
+				</beans:entry>
+			</beans:map>
+		</beans:property>
+		
+		<beans:property name="testMapObj">
+			<beans:map>
+				<beans:entry>
+					<beans:key>
+						<beans:value>Obj1</beans:value>
+					</beans:key>
+					<beans:ref bean = "info1"></beans:ref>
+				</beans:entry>
+				<beans:entry>
+					<beans:key>
+						<beans:value>Obj2</beans:value>
+					</beans:key>
+					<beans:ref bean = "info2"></beans:ref>
+				</beans:entry>
+			</beans:map>
+		</beans:property>
+		
+		
+	</beans:bean> 
+	
+	
+	<beans:bean id="info1"  class="com.spring.demo.Info">
+		<beans:property name="id" value="aaa" />
+		<beans:property name="pw" value="111" />
+		<beans:property name="name" value="김철수" />
+	</beans:bean> 	
+	
+	<beans:bean id="info2"  class="com.spring.demo.Info">
+		<beans:property name="id" value="bbb" />
+		<beans:property name="pw" value="222" />
+		<beans:property name="name" value="이만수" />
+	</beans:bean> 	
+	
+	
+
+	
+	
+</beans:beans>
